@@ -34,3 +34,7 @@ git --version
 git clone https://github.com
 ```
 
+#### Autor:
+
+**sebastianberrio2992232@correo.itm.edu.co**
+
