@@ -67,7 +67,7 @@ def subarreglo_maximo(valores: list[float], inicio: int, fin: int) -> tuple[int,
 
     Args:
         valores: variacion diaria de caja.
-        inicio: indice inicial del rango a considerar (inclusive).
+        inicio: indice inicial del rango a considerar
         fin: indice final del rango a considerar (inclusive).
 
     Returns:
