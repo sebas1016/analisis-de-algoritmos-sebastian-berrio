@@ -1,4 +1,5 @@
-"""Script de pruebas unitarias y de integración para validar las estructuras.
+"""
+Script de pruebas unitarias y de integración para validar las estructuras.
 """
 
 import random
@@ -66,11 +67,11 @@ def ejecutar_pruebas() -> None:
         for _ in range(20):
             g_inexistente = random.randint(1111111111, 8888888888)
             if g_inexistente not in guias_insertadas:
-                assert lista_test.buscar(g_inexistente) == t_buscar
-                t_buscar = tabla_test.buscar(g_inexistente)
-                assert lista_test.buscar(g_inexistente) == t_buscar
+                res_lista_mal = lista_test.buscar(g_inexistente)
+                res_tabla_mal = tabla_test.buscar(g_inexistente)
+                assert res_lista_mal == res_tabla_mal
 
-    print("Exito.")
+    print("¡Todo funciona!")
 
 
 if __name__ == "__main__":
