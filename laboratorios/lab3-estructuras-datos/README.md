@@ -1,74 +1,11 @@
-# Laboratorio 2 — Dividir y vencer
-
-**Autor:** Sebastián Berrio Chavarria
-**Correo:** sebastianberrio2992232@correo.itm.edu.co
-
-## Como reproducir
-
-Para correr los scripts de este laboratorio y comprobar que todo funciona de la misma forma en que se midió, siga estos pasos en la terminal:
-
-1. **Activar el entorno virtual:**  
-   Vaya a la raíz del repositorio y active el entorno virtual ejecutando:
-   ```bash
-   # En Windows (PowerShell)
-   .\venv\Scripts\Activate.ps1
-   ```
-2. **Instalar dependencias:**  
-   Asegúrese de tener `matplotlib` listo con el archivo de requisitos:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. **Ejecutar las pruebas de verificación:**  
-   Corra el script de validación para ver la tabla de consistencia y los aciertos en la terminal:
-   ```bash
-   python pruebas.py
-   ```
-4. **Ejecutar las mediciones de rendimiento:**  
-Genere las gráficas de tiempo ejecutando:
-```bash
-python medicion.py
-```
-
----
-
-## Parte 1 — Verificación de las Estructuras
-
-* Enlaces al código: [estructuras.py](estructuras.py) | [pruebas.py](pruebas.py)
-
-* **Búsquedas básicas:** Se probó qué pasa cuando una guía sí está registrada y qué pasa cuando metemos un número que no existe en el sistema, confirmando que tanto la lista como la tabla hash responden correctamente.
-* **Colisión controlada:** Forcé a la tabla a agrupar las guías `10`, `24` y `17` usando un tamaño de tabla $m = 7$. El script validó que las tres guías se guardaron juntas en la casilla número 3, que la lista interna de ese cajón midió exactamente 3 elementos de largo y que el factor de carga marcó $3/7$.
-* **Prueba masiva aleatoria:** Corrí 20 simulaciones con colecciones de guías al azar (cambiando la cantidad de datos y el tamaño de la tabla en cada intento). En cada vuelta, se cruzaron los resultados de la lista enlazada y de la tabla hash para comprobar que dieran exactamente la misma respuesta tanto en guías reales como en datos erróneos.
-
----
-
-## Parte 2 — Gráficas y Metodología de Medición
-
-* Enlace al código: [medicion.py](medicion.py)
-
-### Metodología
-Las pruebas se hicieron usando una semilla fija en el generador de números aleatorios para garantizar que los datos fueran siempre los mismos y la medición fuera transparente. El cronómetro se activó únicamente usando `time.perf_counter()` para medir el viaje dentro de la estructura de datos, dejando por fuera el tiempo que tarda Python en inventarse las guías o en armar los nodos. 
-
-* **Experimento A:** Se midió el rendimiento con tamaños de datos de $n = [100, 500, 1000, 5000, 20000, 50000]$. Para cada tamaño, la tabla hash tomó un tamaño $m$ equivalente al número primo más cercano a $n/2$, manteniendo el factor de carga rozando el valor de 2. En cada punto de datos se realizaron 200 búsquedas de guías inexistentes para promediar el tiempo.
-* **Experimento B:** Con un número fijo de $n = 20000$ guías, cambié el tamaño de las casillas de la tabla para obligar al factor de carga ($\alpha$) a tomar los valores de $0.5, 1.0, 4.0$ y $10.0$, promediando de nuevo 200 consultas fallidas por cada nivel.
-
-### Gráficas Obtenidas
-
-![Lista vs Tabla Hash](graficas/lista_vs_tabla.png)
-
-![Tiempo vs Factor de Carga](graficas/tiempo_vs_alfa.png)
-
----
-
-# Informe de Laboratorio 3: Rediseño del Sistema de Consultas — Rutas del Caribe
+# Informe de Laboratorio 3: Estructiras de Datos
 
 **Autor:** Sebastian Berrio  
 **Correo:** sebastianberrio2992232@correo.itm.edu.co  
 
 ---
 
-## Instrucciones para Reproducir el Experimento
-
-Para correr los scripts de este laboratorio y comprobar que todo funciona de la misma forma en que se midió, siga estos pasos en la terminal:
+## Instrucciones para Reproducir el laboratorio
 
 1. **Activar el entorno virtual:**  
    Vaya a la raíz del repositorio y active el entorno virtual ejecutando:
@@ -98,7 +35,6 @@ Para correr los scripts de este laboratorio y comprobar que todo funciona de la 
 
 * Enlaces al código fuente: [estructuras.py](estructuras.py) | [pruebas.py](pruebas.py)
 
-Para estar 100% seguros de que el sistema no iba a fallar, creé un script automatizado con la herramienta `assert` de Python. La verificación cubrió los siguientes casos clave:
 * **Búsquedas básicas:** Se probó qué pasa cuando una guía sí está registrada y qué pasa cuando metemos un número que no existe en el sistema, confirmando que tanto la lista como la tabla hash responden correctamente.
 * **Colisión controlada:** Forcé a la tabla a agrupar las guías `10`, `24` y `17` usando un tamaño de tabla $m = 7$. El script validó que las tres guías se guardaron juntas en la casilla número 3, que la lista interna de ese cajón midió exactamente 3 elementos de largo y que el factor de carga marcó $3/7$.
 * **Prueba masiva aleatoria:** Corrí 20 simulaciones con colecciones de guías al azar (cambiando la cantidad de datos y el tamaño de la tabla en cada intento). En cada vuelta, se cruzaron los resultados de la lista enlazada y de la tabla hash para comprobar que dieran exactamente la misma respuesta tanto en guías reales como en datos erróneos.
@@ -110,7 +46,7 @@ Para estar 100% seguros de que el sistema no iba a fallar, creé un script autom
 * Enlace al código de medición: [medicion.py](medicion.py)
 
 ### Metodología
-Las pruebas se hicieron usando una semilla fija en el generador de números aleatorios para garantizar que los datos fueran siempre los mismos y la medición fuera transparente. El cronómetro se activó únicamente usando `time.perf_counter()` para medir el viaje dentro de la estructura de datos, dejando por fuera el tiempo que tarda Python en inventarse las guías o en armar los nodos. 
+ El cronómetro se activó únicamente usando `time.perf_counter()` para medir el viaje dentro de la estructura de datos, dejando por fuera el tiempo que tarda Python en inventarse las guías o en armar los nodos. 
 
 * **Experimento A:** Se midió el rendimiento con tamaños de datos de $n = [100, 500, 1000, 5000, 20000, 50000]$. Para cada tamaño, la tabla hash tomó un tamaño $m$ equivalente al número primo más cercano a $n/2$, manteniendo el factor de carga rozando el valor de 2. En cada punto de datos se realizaron 200 búsquedas de guías inexistentes para promediar el tiempo.
 * **Experimento B:** Con un número fijo de $n = 20000$ guías, cambié el tamaño de las casillas de la tabla para obligar al factor de carga ($\alpha$) a tomar los valores de $0.5, 1.0, 4.0$ y $10.0$, promediando de nuevo 200 consultas fallidas por cada nivel.
