@@ -16,7 +16,10 @@ def ejecutar_pruebas() -> None:
     Raises:
         AssertionError: Si alguna de las validaciones lógicas falla.
     """
-    
+    print("=" * 60)
+    print("         INICIANDO AUDITORÍA DE ESTRUCTURAS DE DATOS         ")
+    print("=" * 60)
+
     lista_simple = ListaEnlazada()
     lista_simple.insertar(1234567890, "en bodega")
     assert lista_simple.buscar(1234567890) == "en bodega"
@@ -41,9 +44,18 @@ def ejecutar_pruebas() -> None:
     assert tabla.casillas[3].tamano == 3
     assert tabla.factor_carga() == 3 / 7
 
-    estados_posibles = ["en bodega", "en reparto", "entregado", "cancelado"]
+    print("\n[✔] PRUEBA DE COLISIÓN FORZADA PASADA")
+    print(f" -> Guías (10, 24, 17) guardadas en casilla: {tabla.hash(10)}")
+    print(f" -> Tamaño real de la lista en casilla 3: {tabla.casillas[3].tamano}")
+    print(f" -> Factor de carga obtenido: {tabla.factor_carga():.4f}")
+    print("-" * 60)
 
-    for _ in range(20):
+    estados_posibles = ["en bodega", "en reparto", "entregado", "cancelado"]
+    
+    print(f"{'Corrida':<10}{'Casillas (m)':<15}{'Guías (n)':<12}{'Factor Carga (alpha)':<20}")
+    print("-" * 60)
+
+    for i in range(20):
         lista_test = ListaEnlazada()
         m_aleatorio = random.randint(5, 50)
         tabla_test = TablaHash(m_aleatorio)
@@ -71,7 +83,10 @@ def ejecutar_pruebas() -> None:
                 res_tabla_mal = tabla_test.buscar(g_inexistente)
                 assert res_lista_mal == res_tabla_mal
 
-    print("¡Todo funciona!")
+        alpha_actual = tabla_test.factor_carga()
+        print(f"#{i+1:<9}{m_aleatorio:<15}{len(guias_insertadas):<12}{alpha_actual:.4f}")
+
+    print("-" * 60)
 
 
 if __name__ == "__main__":
